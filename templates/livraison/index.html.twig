@@ -1,0 +1,54 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Livraison index{% endblock %}
+
+{% block body %}
+    <h2>Livraisons</h2>
+    <p>Type something in the input field to search the table for your livraisons:</p>
+    <input id="myInput" type="text" placeholder="Search..">
+    <br><br>
+
+    <h1></h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumL</th>
+                <th>NomLivreur</th>
+                <th>TelLivreur</th>
+                <th>DateLivraison</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for livraison in livraisons %}
+        <tbody id="myTable">
+            <tr>
+                <td>{{ livraison.id }}</td>
+                <td>{{ livraison.numL }}</td>
+                <td>{{ livraison.nomLivreur }}</td>
+                <td>{{ livraison.telLivreur }}</td>
+                <td>{{ livraison.dateLivraison ? livraison.dateLivraison|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('livraison_new') }}">ajouter</a>
+                    <a href="{{ path('livraison_show', {'id': livraison.id}) }}">afficher</a>
+                    <a href="{{ path('livraison_edit', {'id': livraison.id}) }}">modifier</a>
+                    <a href="{{ path('livraison_delete', {'id': livraison.id}) }}">supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- start Gist JS code-->
+    <script>
+        (function(d,h,w){var gist=w.gist=w.gist||[];gist.methods=['trackPageView','identify','track','setAppId'];gist.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);gist.push(e);return gist;}};for(var i=0;i<gist.methods.length;i++){var c=gist.methods[i];gist[c]=gist.factory(c)}s=d.createElement('script'),s.src="https://widget.getgist.com",s.async=!0,e=d.getElementsByTagName(h)[0],e.appendChild(s),s.addEventListener('load',function(e){},!1),gist.setAppId("uxued3m3"),gist.trackPageView()})(document,'head',window);
+    </script>
+    <!-- end Gist JS code-->
+{% endblock %}

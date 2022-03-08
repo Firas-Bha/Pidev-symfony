@@ -1,0 +1,62 @@
+{% extends 'base-front.html.twig' %}
+{% block title%} Liste des Produits {% endblock %}
+
+{% block body %}
+    <h2>Produits</h2>
+    <p>Type something in the input field to search what you desire:</p>
+    <input id="myInput" type="text" placeholder="Search..">
+    <br><br>
+
+    <table id="produits" class="table table-striped">
+        <thead>
+        <tr>
+
+            <td>Reference</td>
+            <td>Libelle</td>
+            <td>Nom</td>
+            <td>Nombre</td>
+            <td>Prix</td>
+            <td>Marque</td>
+            <td>Reduction</td>
+            <td>Date</td>
+            <td>NomCategorie</td>
+            <td>Image</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in p %}
+        <tbody id="myTable">
+            <tr>
+
+
+                <td>{{ i.id }}</td>
+                <td>{{ i.libelle }}</td>
+                <td>{{ i.nomP }}</td>
+                <td>{{ i.nombre }}</td>
+                <td>{{ i.prix }}</td>
+                <td>{{ i.marque }}</td>
+                <td>{{ i.reduction }}</td>
+                <td>{{ i.dateP|date("d/m/Y")  }}</td>
+                <td>{{ i.categorie.nomC }}</td>
+                <td class="table-light"><img src="{{ asset('/uploads/' ~ i.image ) }}" alt="img" class="image" style="max-height: 150px; width: 120px;" ></td>
+
+                <td>
+                    <form action="{{ path('produit_list',{'id':i.id}) }}">
+                        <button>Imprimer</button></form>
+
+                </td>
+
+
+
+            </tr>
+
+        </tbody>
+        {% endfor %}
+        </tbody>
+    </table>
+    <!-- start Gist JS code-->
+    <script>
+        (function(d,h,w){var gist=w.gist=w.gist||[];gist.methods=['trackPageView','identify','track','setAppId'];gist.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);gist.push(e);return gist;}};for(var i=0;i<gist.methods.length;i++){var c=gist.methods[i];gist[c]=gist.factory(c)}s=d.createElement('script'),s.src="https://widget.getgist.com",s.async=!0,e=d.getElementsByTagName(h)[0],e.appendChild(s),s.addEventListener('load',function(e){},!1),gist.setAppId("uxued3m3"),gist.trackPageView()})(document,'head',window);
+    </script>
+    <!-- end Gist JS code-->
+{% endblock %}

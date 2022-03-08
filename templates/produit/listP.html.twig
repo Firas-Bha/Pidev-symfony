@@ -1,0 +1,43 @@
+
+{% block body %}
+<h1 align="center">Liste Produits</h1><hr>
+    <table id="produits" class="table table-striped">
+        <thead>
+        <tr>
+
+            <td>Reference</td>
+            <td>Libelle</td>
+            <td>Nom</td>
+            <td>Nombre</td>
+            <td>Prix</td>
+            <td>Marque</td>
+            <td>Reduction</td>
+            <td>Date</td>
+            <td>NomCategorie</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in p %}
+            <tr>
+
+
+                <td>{{ i.id }}</td>
+                <td>{{ i.libelle }}</td>
+                <td>{{ i.nomP }}</td>
+                <td>{{ i.nombre }}</td>
+                <td>{{ i.prix }}</td>
+                <td>{{ i.marque }}</td>
+                <td>{{ i.reduction }}</td>
+                <td>{{ i.dateP|date("d/m/Y")  }}</td>
+                <td>{{ i.categorie.nomC }}</td>
+
+
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
