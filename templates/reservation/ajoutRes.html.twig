@@ -1,0 +1,67 @@
+{% extends 'base-front.html.twig' %}
+{% block body %}
+
+    <section class="pricing-section spad">
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="section-title">
+                <h2 class="card-title">Réserver évenement</h2>
+
+            </div>
+    <div class="col-lg-15 col-md-15">
+        <div class="ps-item">
+            {{ form_start(re)}}
+            <div class="card-body">
+
+                    <div class="form-group">
+                        <h3 class="form-label" for="exampleInputname">date de la réservation</h3>
+                        {{ form_widget(re.dateRes ) }}
+                        {{ form_errors(re.dateRes) }}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputEmail2">nombres de personnes (max 6)</label>
+                        {{ form_widget(re.nbrPersonnes , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nombres de personnes'}} ) }}
+                        {{ form_errors(re.nbrPersonnes) }}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputEmail2">Event</label>
+                        {{ form_widget(re.event, {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Event'}} ) }}
+
+                    </div>
+
+                    <div class="form-group mb-0">
+                        <div class="checkbox checkbox-secondary">
+                            {{ form_widget(re) }}
+                            <button id="checkout-button" type="submit" class="btn btn-success " ><i class="fe fe-check mr-2"></i>réserver</button>
+                        </div>
+                    </div>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ message }}
+                        </div>
+                    {% endfor %}
+
+            </div>
+            {{ form_end(re) }}
+        </div>
+    </div>
+<div>
+
+
+</div>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript"></script>
+
+    <script>
+        function validateSubmit() {
+            result = confirm("Êtes-vous sur de vouloir réserver ?");
+            if (result) {
+                $('#form').submit();
+
+
+            }
+        }
+    </script>
+
+{% endblock %}

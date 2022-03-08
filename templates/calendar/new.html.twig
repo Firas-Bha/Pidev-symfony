@@ -1,0 +1,14 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}New Calendar{% endblock %}
+
+{% block body %}
+    <h1>Create new Calendar</h1>
+
+    {{ include('calendar/_form.html.twig') }}
+
+  <div>
+      <button id="checkout-button" type="submit" class="btn btn-success " ><i class="fe fe-check mr-2"></i>Ajouter</button>
+  </div>
+    <a href="{{ path('calendar_index') }}">back to list</a>
+{% endblock %}

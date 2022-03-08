@@ -1,0 +1,3 @@
+# config/routes/calendar.yaml
+#calendar:
+   # resource: '%CalendarBundle%/vendor/tattali/calendar-bundle/src/Resources/config/routing.yaml'
