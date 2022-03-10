@@ -1,0 +1,61 @@
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-Ua-Compatible" Content="ie=edge">
+    </head>
+    <body>
+
+    <!-- Table Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <h1 align="center">Liste Des Cours</h1>
+                    <h2>Notre salle xtreme gym met a votre disposition notre planning des cours  </h2>
+                    <table border=1 class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Reference</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">{% trans %}Heure début{% endtrans %}</th>
+                            <th scope="col">{% trans %}Durée{% endtrans %}</th>
+                            <th scope="col">{% trans %}Niveau{% endtrans %}</th>
+
+
+                            <th scope="col">{% trans %}Nombre de Serie{% endtrans %}</th>
+                            <th scope="col"> {% trans %} Nom de salle{% endtrans %}</th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                        {% for c in cours %}
+                            <tr>
+                                <th scope="row"> {{ c.Id }} </th>
+                                <td> {{ c.TypeC }} </td>
+                                <td> {{ c.getDateC()|date('d-m-Y ') }} </td>
+                                <td> {{ c.getHeureDebutC()|date('H:i:s')}} </td>
+                                <td> {{ c.getDureeC()|date('H:i:s')}} </td>
+                                <td> {{ c.NiveauC }} </td>
+
+                                <td> {{ c.SerieC }} </td>
+                                <td> {{ c.salle.NomS }} </td>
+                               </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Table End -->
+    </body>
+    </html>

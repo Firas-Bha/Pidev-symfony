@@ -1,0 +1,116 @@
+{% extends 'base-back.html.twig' %}
+
+
+
+{% block stylesheets %}
+    <style>
+        #calendrier{
+            width: auto;
+            margin: auto;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+{% block body %}
+
+    <div id="calendrier">
+    </div>
+
+    <div style="margin-left:20px;">
+        <form href="{{path('afficheETriCapacite')}}"><button>  Trier Par Capacite </button></form>
+    </div>
+
+    <div style="margin-left:20px;">
+        <form  href="{{path('afficheETriNom')}}"> <button> Trier Par Nom </button> </form>
+    </div>
+
+    <div style="margin-left:20px;">
+        <form href="{{path('afficheETriDate')}}"><button>  Trier Par Date </button> </form>
+    </div>
+
+
+    <table class="table mb-0">
+        <div style="margin-left:1000px;">
+            <a class="btn btn-info" href="{{path('ajoutE')}}"> Ajouter un Event </a>
+        </div>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Nom
+            </td>
+            <td>
+                Capacite
+            </td>
+            <td>
+                Date
+            </td>
+            <td>
+                Description
+            </td>
+            <td>
+                Image
+            </td>
+            <td>
+                Adresse
+            </td>
+        </tr>
+        {%  for i in e %}
+            <tr>
+
+                <td>
+                    {{ i.id }}
+                </td>
+                <td>
+                    {{ i.Nom }}
+                </td>
+                <td>
+                    {{ i.Capacite}}
+                </td>
+                <td>
+                    {{ i.getDate()|date('d-m-Y') }}
+                </td>
+
+                <td>
+                    {{ i.Description}}
+                </td>
+                <td><img src="{{ asset('/uploads/' ~ i.Image ) }}" alt="img" class="image" style="max-height: 180px; width: 150px;" ></td>
+
+                <td>
+                    {{ i.Adresse}}
+                </td>
+
+                <td>
+                    <form class="btn btn-info" action="{{ path('ajoutE',{'id':i.id}) }}">
+                        <button> Ajouter </button>
+                    </form>
+                </td>
+
+                <td>
+                    <form class="btn btn-info" action="{{ path('suppE',{'id':i.id}) }}">
+                        <button>   Supprimer </button>
+                    </form>
+                </td>
+                <td>
+                    <form  class="btn btn-info" action="{{ path('modifE',{'id':i.id}) }}">
+                        <button>   modifier </button>
+                    </form>
+                </td>
+
+
+            </tr>
+
+        {% endfor %}
+
+    </table>
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
+
+
+

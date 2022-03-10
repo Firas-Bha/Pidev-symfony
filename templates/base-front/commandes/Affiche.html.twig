@@ -1,0 +1,73 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+    <div class="mx-auto" style="width: 500px;">
+        <div class="font-italic">
+            <h4 class="text-danger">Gérer  Commandes </h4>
+        </div>
+    </div>
+    <h2>Filterable Table</h2>
+    <p>Type something in the input field to search the table for first names, last names or emails:</p>
+    <input id="myInput" type="text" placeholder="Search..">
+    <br><br>
+    <div class="container h-100">
+    <div class="row align-items-center h-100">
+    <table class="table">
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+
+                <tr>
+                    <th scope="row">ID</th>
+                    <th scope="row">Reference Pannier</th>
+                    <th scope="row">Nom</th>
+                    <th scope="row">Prenom</th>
+                    <th scope="row">Email</th>
+                    <th scope="row">Quantité</th>
+                    <th scope="row">Titre</th>
+                    <th scope="row">Prix</th>
+                    <th scope="row">Total</th>
+                    <th scope="row">Mode Payment </th>
+                    <th scope="row">Date Reception</th>
+                </tr>
+            </div>
+        </div>
+        {% for c in commande %}
+        <tr >
+            <td>
+                {{ c.id}}
+            </td>
+            <td>{{ c.Panniers.nom}}</td>
+
+            <td>{{ c.nom }}</td>
+            <td>{{ c.prenom}}</td>
+            <td>{{ c.email}}</td>
+            <td>
+                {{ c.quantite }}
+            </td>
+            <td>
+                {{ c.titre }}
+            </td>
+            <td>{{ c.prix }}</td>
+            <td>{{ c.Total }}</td>
+            <td>{{ c.modepay }}</td>
+            <td>{{ c.Date|date('d-m-Y')}}</td>
+
+
+            <td><a href="{{ path('add',{'id': c.id}) }}">Ajouter Commandes</a></td>
+            <td><a href="{{ path('updatee',{'id': c.id}) }}">Modifier Commandes</a></td>
+            <td><a href="{{ path('de',{'id': c.id}) }}">Supprimer Commandes</a></td>
+            <td><a href="{{ path('rec') }}">Reclamer</a></td>
+        </tr >
+        {% endfor %}
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock body %}

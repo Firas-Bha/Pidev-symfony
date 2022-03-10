@@ -1,0 +1,79 @@
+
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+
+
+    <table class="table mb-0">
+        <div style="margin-left:10px;">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <a class="fa fa-chart-pie fa-3x text-primary"  href="{{path('stats')}}"> </a>
+            </div>
+        </div>
+        <div style="margin-left:10px;">
+            <a class="btn btn-info" href="{{path('ajoutResAdmin')}}"> Ajouter une Reservation </a>
+
+        </div>
+
+
+
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                DateReservation
+            </td>
+            <td>
+               Event
+            </td>
+            <td>
+               Nombre Personnes
+            </td>
+            <td>
+                Email
+            </td>
+
+
+
+        </tr>
+        {%  for i in r %}
+            <tr>
+
+                <td>
+                    {{ i.id }}
+                </td>
+                <td>
+                    {{ i.getDateRes()|date('d-m-Y H:i:s') }}
+                </td>
+                <td>
+                    {{ i.event.Nom}}
+                </td>
+                <td>
+                    {{ i.nbrPersonnes }}
+                </td>
+                <td>
+                    {{ i.email }}
+                </td>
+
+
+                <td>
+
+                    <a class="btn btn-info" href="{{ path('suppRes',{'id':i.id}) }}">
+                       Supprimer
+                    </a>
+
+                </td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('modifRes',{'id':i.id}) }}">
+                        modifier
+                    </a>
+                </td>
+
+
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-Ua-Compatible" Content="ie=edge">
+</head>
+<body>
+
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+
+                    <h1 align="center" class="p-2 mb-2 bg-info text-white">{% trans %}Liste Des Cours{% endtrans %}</h1>
+
+
+                <button type="submit" class="btn btn-outline-info"><a href="{{ path('listC') }}">{% trans %}Generer pdf{% endtrans %}</a></button>
+                <button type="submit" class="btn btn-outline-info"><a href="{{ path('statss') }}">{% trans %}Statistique{% endtrans %}</a></button>
+                <button type="submit" class="btn btn-outline-info"><a href="{{ path('ajoutercours') }}">{% trans %}Ajouter{% endtrans %}</a></button>
+
+
+                {% set flashbag_notices=app.session.flashbag.get('notice') %}
+                {% if flashbag_notices is not empty %}
+
+                    <ul class="alert alert-primary alert-dismissible fade show" role="alert">
+                        {% for notice in flashbag_notices%}
+                            {{ notice }}
+                        {% endfor %}
+                    </ul>
+
+                {% endif %}
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Reference</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">{% trans %}Heure début{% endtrans %}</th>
+                        <th scope="col">{% trans %}Durée{% endtrans %}</th>
+                        <th scope="col">{% trans %}Niveau{% endtrans %}</th>
+                        <th scope="col">{% trans %}Image{% endtrans %}</th>
+                        <th scope="col"> {% trans %}Couleur{% endtrans %}</th>
+                        <th scope="col">{% trans %}Nombre de Serie{% endtrans %}</th>
+                        <th scope="col"> {% trans %} Nom de salle{% endtrans %}</th>
+                        <th scope="col">{% trans %}Supprimer{% endtrans %}</th>
+                        <th scope="col">{% trans %}Modifier{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for c in cours %}
+                    <tr>
+                        <th scope="row"> {{ c.Id }} </th>
+                        <td> {{ c.TypeC }} </td>
+                        <td> {{ c.getDateC()|date('d-m-Y ') }} </td>
+                        <td> {{ c.getHeureDebutC()|date('H:i:s')}} </td>
+                        <td> {{ c.getDureeC()|date('H:i:s')}} </td>
+                        <td> {{ c.NiveauC }} </td>
+                        <td> <img src= "{{ asset('Uploads/' ~ c.ImageC ) }}" alt="image"  style="max-height: 180px; width: 150px;" ></td>
+                        <td> {{ c.couleur }} </td>
+                        <td> {{ c.SerieC }} </td>
+                        <td> {{ c.salle.NomS }} </td>
+                        <td><button type="submit" class="btn btn-primary"><a href="{{ path('d',{'Id':c.Id}) }}" class="text-light">{% trans %}Supprimer{% endtrans %} </a></button></td>
+                        <td><button type="submit" class="btn btn-info m2"><a href="{{ path('update',{'Id':c.Id}) }}" class="text-light">{% trans %}Modifier{% endtrans %}</a></button></td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                <ul class="pagination">
+                    <li class=" {{ (pageC == 1) ? 'disabled' : ''}}">
+                        <a href="{{ (pageC >1) ? '?pageC=' ~ (pageC -1) : '' }}">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </li>
+
+                    {% set pageCs = (totalC/limitC)|round(0,'ceil') %}
+                    {% for item in 1..pageCs %}
+                        <li class="btn btn-sm-square btn-toolbar btn-outline-info {{ (pageC == item) ?'active':''}}">
+                            <a href="?pageC={{ item }}">{{ item }}</a>
+                        </li>
+                    {% endfor %}
+
+                    <li class=" {{ (pageC == pageCs) ? 'disabled' : ''}}">
+                        <a href="{{ (pageC < pageCs) ? '?page=' ~ (pageC +1) : '' }}">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<!-- Table End -->
+</body>
+</html>
+{% endblock %}
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('back-end/lib/chart/chart.min.js')}}"></script>
+    <script src="{{ asset('back-end/lib/easing/easing.min.js')}}"></script>
+    <script src="{{ asset('back-end/lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{ asset('back-end/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('back-end/lib/tempusdominus/js/moment.min.js')}}"></script>
+    <script src="{{ asset('back-end/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+    <script src="{{ asset('back-end/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+{% endblock %}

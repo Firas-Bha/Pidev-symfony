@@ -1,0 +1,36 @@
+
+
+<h1 align="center">Liste Des Coachs</h1>
+<center>
+
+                <table class="table table-striped" border="1">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">nom</th>
+                        <th scope="col">prenom</th>
+                        <th scope="col">specialité</th>
+                        <th scope="col">adresse</th>
+                        <th scope="col">telephone</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr{% for i in Coach %}>
+                        <td>{{ i.Id }}</td>
+                        <td>{{ i.nom }}</td>
+                        <td>{{ i.prenom }}</td>
+
+                        <td>{{ i.specialite }}</td>
+                        <td>{{ i.adresse }}</td>
+                        <td>{{ i.numero }}</td>
+                        <td><a href="{{ path('updatecoach',{'id':i.id}) }}" > Update </a> </td>
+                        <td><a href="{{ path('c',{'id':i.id}) }}">Delete</a></td>
+                    </tr{% endfor %}>
+
+                    </tbody>
+                </table>
+    </center>
+

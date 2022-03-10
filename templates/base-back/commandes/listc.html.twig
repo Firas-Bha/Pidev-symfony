@@ -1,0 +1,47 @@
+{% block body %}
+    <div class="mx-auto" style="width: 500px;">
+        <div class="font-italic">
+            <h4 class="text-danger">Recu détailé de votre Commandes </h4>
+        </div>
+    </div>
+    <div class="container h-100">
+    <div class="row align-items-center h-100">
+    <table border="1" >
+        <thead>
+        <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Mode Payment </th>
+                    <th scope="col">Date Reception</th>
+        </tr>
+                </thead>
+        <tbody>
+        <tr {% for c in commande %}>
+            <td>
+                {{ c.id}}
+            </td>
+            <td>{{ c.nom }}</td>
+            <td>{{ c.prenom}}</td>
+            <td>
+                {{ c.quantite }}
+            </td>
+            <td>
+                {{ c.titre }}
+            </td>
+            <td>{{ c.prix }}</td>
+            <td>{{ c.Total }}</td>
+            <td>{{ c.modepay }}</td>
+            <td>{{ c.Date|date('d-m-Y') }}</td>
+
+
+        </tr {% endfor %}>
+        </tbody>
+
+
+    </table>
+{% endblock body %}

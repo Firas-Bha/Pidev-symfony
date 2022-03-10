@@ -1,0 +1,48 @@
+{% extends 'base-front.html.twig' %}
+{% block body %}
+    <section class="classes-section spad">
+    <div class="container">
+        <div class="section-title">
+            <span>recu de votre Commande  </span>
+        </div>
+        <section class="classes-section spad">
+
+            <table class="table table-dark">
+                <div class="row align-items-center h-100">
+                    <tbody>
+                    <div class="container h-100">
+                        <div class="row align-items-center h-100">
+                            <div class="ts_text">
+                    <tr>
+                        <th scope="row">ID</th>
+                        <th scope="row">Nom</th>
+                        <th scope="row">Etat</th>
+                        <th scope="row">Catégorie produits</th>
+                        <th scope="row">Date d'expiration pannier</th>
+
+                    </tr>
+                </div>
+                <tr {% for p in pannier %}>
+                    <td>
+                        {{ p.id}}
+                    </td>
+                    <td>
+                        {{ p.nom }}
+                    </td>
+                    <td>
+                        {{ p.etat }}
+                    </td>
+                    <td>
+                        {{ p. categorie}}
+                    </td>
+
+                    <td>
+                        {{ p.dateexp|date('d-m-Y')}}
+                    </td>
+                    <td><a href="{{ path('rec') }}">Reclamer</a></td>
+                </tr {% endfor %}>
+
+
+                            {{ knp_pagination_render(pannier) }}
+            </table>
+{% endblock body %}

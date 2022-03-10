@@ -1,0 +1,69 @@
+{% extends 'base-back.html.twig' %}
+{% block title%} Liste des Categories {% endblock %}
+
+{% block body %}
+    <h2>Categories</h2>
+    <p>Type something in the input field to search the table for your categories:</p>
+    <input id="myInput" type="text" placeholder="Search..">
+    <br><br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+    <table id="categories" class="table table-striped">
+        <thead>
+        <tr>
+
+            <td>Id</td>
+            <td>Nom categorie</td>
+            <td>Type categorie</td>
+            <td>Sexe</td>
+            <td>CategorieOrder</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in c %}
+        <tbody id="myTable">
+            <tr>
+
+
+                <td>{{ i.id }}</td>
+                <td>{{ i.nomC }}</td>
+                <td>{{ i.type }}</td>
+                <td>{{ i.sexe }}</td>
+                <td>{{ i.CategorieOrder }}</td>
+                <td>
+                    <form action="{{ path('ajoutC',{'id':i.id}) }}">
+                        <button>Ajouter</button></form>
+
+                </td>
+                <td>
+                    <form action="{{ path('suppC',{'id':i.id}) }}">
+                        <button>Supprimer</button></form>
+
+                </td>
+                <td>
+                    <form action="{{ path('modifC',{'id':i.id}) }}">
+                        <button>Modifier</button></form>
+
+                </td>
+
+
+
+
+            </tr>
+        </tbody>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base-front.html.twig' %}
+{% block body %}
+    <section class="classes-section spad">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+
+        <div class="section-title">
+            <span>recu de votre Commande  </span>
+        </div>
+        <section class="classes-section spad">
+            <table class="table table-dark">
+                <div class="row align-items-center h-100">
+                    <tbody>
+                    <div class="container h-100">
+                        <div class="row align-items-center h-100">
+                            <div class="ts_text">
+
+                                <tr>
+                                    <th scope="row">ID</th>
+                                    <th scope="row">Reference Pannier</th>
+                                    <th scope="row">Nom</th>
+                                    <th scope="row">Prenom</th>
+                                    <th scope="row">Quantité</th>
+                                    <th scope="row">Titre</th>
+                                    <th scope="row">Prix</th>
+                                    <th scope="row">Total</th>
+                                    <th scope="row">Date Reception</th>
+                                    <th scope="row">Imprimer le Recu de Commande </th>
+                                </tr>
+                            </div>
+                        </div>
+
+                        <tr {% for c in commande %}>
+                            <td>
+                                {{ c.id}}
+                            </td>
+                            <td>{{ c.Panniers.nom}}</td>
+                            <td>{{ c.nom }}</td>
+                            <td>{{ c.prenom}}</td>
+                            <td>
+                                {{ c.quantite }}
+                            </td>
+                            <td>
+                                {{ c.titre }}
+                            </td>
+                            <td>{{ c.prix }}</td>
+                            <td>{{ c.Total }}</td>
+                            <td>{{ c.modepay }}</td>
+                            <td>{{ c.Date|date('d-m-Y') }}</td>
+
+                            <td><a href="{{ path('liste') }}">Imprimer recu de votre Commande</a></td>
+                            <td><a href="{{ path('rec') }}">Reclamer</a></td>
+
+
+
+                        </tr {% endfor %}>
+                    </div>
+                    </tbody>
+                </div>
+    </div>
+    </table>
+{% endblock body %}

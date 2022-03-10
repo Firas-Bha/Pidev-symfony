@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+
+        <trans-unit id="J2o2jF0" resname="Liste Des Cours">
+              <source>Liste Des Cours</source>
+              <target>List of lessons</target>
+            </trans-unit>
+            <trans-unit id="RVByChh" resname="Couleur">
+              <source >Couleur</source>
+              <target>Color</target>
+            </trans-unit>
+            <trans-unit id="AOn4X8P" resname="Nom de salle">
+              <source>Nom de salle</source>
+              <target>Room's name</target>
+            </trans-unit>
+            <trans-unit id="AOn4X8r" resname="Supprimer">
+                    <source>Supprimer</source>
+                    <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="AOn4X0r" resname="Heure début">
+                    <source>Heure début</source>
+                    <target>Beginning hour</target>
+            </trans-unit>
+            <trans-unit id="AO" resname="Durée">
+                    <source>Durée</source>
+                    <target>Duration</target>
+            </trans-unit>
+            <trans-unit id="AO1" resname="Niveau">
+                          <source>Niveau</source>
+                          <target>Level</target>
+            </trans-unit>
+            <trans-unit id="AO2" resname="Image">
+                                <source>Image</source>
+                                <target>Picture</target>
+            </trans-unit>
+            <trans-unit id="AO3" resname="Nombre de Serie">
+                                      <source>Nombre de Serie</source>
+                                      <target>serie's number</target>
+            </trans-unit>
+            <trans-unit id="AOn8" resname="Modifier">
+                                            <source>Modifier</source>
+                                            <target>Update</target>
+            </trans-unit>
+            <trans-unit id="AOn1" resname="Ajouter Cours">
+                                                  <source>Ajouter Cours</source>
+                                                  <target>Add lesson</target>
+                  </trans-unit>
+            <trans-unit id="A88" resname="Ajouter">
+                          <source>Ajouter</source>
+                          <target>Add</target>
+                  </trans-unit>
+                  <trans-unit id="A81" resname="Modifier Cours">
+                                      <source>Modifier Cours</source>
+                                      <target>Modify lesson</target>
+                              </trans-unit>
+                  <trans-unit id="A82" resname="Vous pouvez vous abonnez a plusieurs cours">
+                                      <source>Vous pouvez vous abonnez a plusieurs cours</source>
+                                      <target>You can subscribe to several courses</target>
+                  </trans-unit>
+                  <trans-unit id="A83" resname="le cours commencera">
+                     <source>le cours commencera à</source>
+                     <target>the lesson will start at</target>
+                  </trans-unit>
+                   <trans-unit id="A84" resname="Nos salles">
+                      <source>Nos salles</source>
+                      <target>our rooms</target>
+                   </trans-unit>
+
+                   <trans-unit id="A85" resname="Consulter liste des salles">
+                      <source>Consulter liste des salles</source>
+                      <target>See list of rooms</target>
+                   </trans-unit>
+                   <trans-unit id="A86" resname="Numero">
+                                   <source>Numero</source>
+                                   <target>Number</target>
+                                </trans-unit>
+                   <trans-unit id="A87" resname="Capacite">
+                                   <source>Capacite</source>
+                                   <target>Capacity</target>
+                   </trans-unit>
+                   <trans-unit id="A89" resname="Nombre max de cours">
+                                                <source>Nombre max de cours</source>
+                                                <target>The Max number of lessons</target>
+                   </trans-unit>
+
+                  <trans-unit id="A805" resname="Accueil">
+                      <source>Accueil</source>
+                      <target>Home</target>
+                   </trans-unit>
+                   <trans-unit id="A806" resname="Salle">
+                                   <source>Salle</source>
+                                   <target>Room</target>
+                                </trans-unit>
+                   <trans-unit id="A807" resname="Ajouter Salle">
+                                   <source>Ajouter Salle</source>
+                                   <target>Add room</target>
+                   </trans-unit>
+                   <trans-unit id="A809" resname="Cours">
+                                                <source>Cours</source>
+                                                <target>Lesson</target>
+                   </trans-unit>
+                   <trans-unit id="A811" resname="Ajouter Cours">
+                                                <source>Ajouter Cours</source>
+                                                <target>Add Lesson</target>
+                   </trans-unit>
+                   <trans-unit id="A812" resname="Nombre de cours par jour">
+                                                <source>Nombre de cours par jour</source>
+                                                <target>number of lessons per day</target>
+                   </trans-unit>
+                   <trans-unit id="A813" resname="Répartition de nombre de serie par cours">
+                          <source>Répartition de nombre de serie par cours</source>
+                          <target>Breakdown of number of series by course</target>
+                   </trans-unit>
+                   <trans-unit id="A814" resname="Liste Des Salles">
+                           <source>Liste Des Salles</source>
+                           <target>List of rooms</target>
+                   </trans-unit>
+                  <trans-unit id="A815" resname="Nom">
+                           <source>Nom</source>
+                           <target>Name</target>
+                   </trans-unit>
+                   <trans-unit id="A816" resname="Modifier Salle">
+                       <source>Modifier Salle</source>
+                       <target>Modify the room</target>
+                   </trans-unit>
+                   <trans-unit id="A8166d" resname="Unique selon tes besoins">
+                                    <source>Unique selon tes besoins</source>
+                                    <target>Unique to your needs</target>
+                   </trans-unit>
+                  <trans-unit id="A8150" resname="travail dur">
+                           <source>travail dur</source>
+                           <target>training hard</target>
+                   </trans-unit>
+                  <trans-unit id="A8151" resname="Soit">
+                           <source>Soit</source>
+                           <target>Be</target>
+                   </trans-unit>
+                  <trans-unit id="A8152" resname="fort">
+                           <source>fort</source>
+                           <target>Strong</target>
+                   </trans-unit>
+                  <trans-unit id="A8153" resname="Sculpte ton corps">
+                           <source>Sculpte ton corps</source>
+                           <target>Shape your body</target>
+                   </trans-unit>
+                  <trans-unit id="A8154" resname="Choisis Xtreme Gym">
+                           <source>Choisis Xtreme Gym</source>
+                           <target>Choose Xtreme Gym</target>
+                   </trans-unit>
+                  <trans-unit id="A8155" resname="Pourquoi nous choisir">
+                           <source>Pourquoi nous choisir</source>
+                           <target>Why chose us?</target>
+                   </trans-unit>
+                  <trans-unit id="A8156" resname="Pousses tes limites">
+                           <source>Pousses tes limites</source>
+                           <target>PUSH YOUR LIMITS FORWARD</target>
+                   </trans-unit>
+                  <trans-unit id="A8157" resname="Contacter nous">
+                           <source>Contacter nous</source>
+                           <target>Contact us</target>
+                   </trans-unit>
+                  <trans-unit id="A8158" resname="rester en contact">
+                           <source>rester en contact</source>
+                           <target>get in touch</target>
+                   </trans-unit>
+                   <trans-unit id="A815988" resname="Valider">
+                            <source>Valider</source>
+                            <target>Submit</target>
+                    </trans-unit>
+                   <trans-unit id="A815981" resname="Recherche">
+                            <source>Recherche</source>
+                            <target>Search</target>
+                    </trans-unit>
+                   <trans-unit id="A8159881" resname="Nos cours">
+                            <source>Nos cours</source>
+                            <target>Our courses</target>
+                    </trans-unit>
+                   <trans-unit id="A8159812" resname="vous trouvez chez nous des cours variés">
+                            <source>vous trouvez chez nous des cours variés</source>
+                            <target>Yo can find multiple lessons</target>
+                    </trans-unit>
+
+
+    </body>
+  </file>
+</xliff>

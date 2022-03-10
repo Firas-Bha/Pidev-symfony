@@ -1,0 +1,75 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+
+    <div class="app-content">
+
+    <div class="side-app">
+
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card m-b-20">
+            <div class="card-header">
+                <h3 class="card-title">Ajouter un évenement</h3>
+
+            </div>
+            {{ form_start(f,{'attr' : {'novalidate' : 'novalidate'}})}}
+            <div class="card-body">
+
+
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputname">Nom</label>
+                        {{ form_widget(f.Nom, {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Nom'}}) }}
+                        {{ form_errors(f.Nom) }}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputname">Capacité</label>
+                        {{ form_widget(f.Capacite) }}
+                        {{ form_errors(f.Capacite) }}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputEmail2">Date</label>
+                        {{ form_widget(f.Date , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Date'}} ) }}
+                        {{ form_errors(f.Date) }}
+
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputEmail2">Image</label>
+                        {{ form_widget(f.Image, {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Image'}} ) }}
+
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputEmail2">Adresse</label>
+                        {{ form_widget(f.Adresse , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Adresse'}} ) }}
+                        {{ form_errors(f.Adresse) }}
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="exampleInputEmail2">Description</label>
+                        {{ form_widget(f.Description , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Description'}} ) }}
+                        {{ form_errors(f.Description) }}
+
+                    </div>
+
+
+                    <div class="form-group mb-0">
+                        <div class="checkbox checkbox-secondary">
+                            {{ form_widget(f) }}
+                            <button id="checkout-button" type="submit" class="btn btn-success " ><i class="fe fe-check mr-2"></i>Ajouter</button>
+                        </div>
+                    </div>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ message }}
+                        </div>
+                    {% endfor %}
+
+            </div>
+            {{ form_end(f) }}
+        </div>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript"></script>
+
+{% endblock %}

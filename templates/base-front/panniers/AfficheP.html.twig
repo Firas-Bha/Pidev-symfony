@@ -1,0 +1,74 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+<div class="mx-auto" style="width: 500px;">
+    <div class="font-italic">
+        <h4 class="text-danger">Gérer Pannier </h4>
+    </div>
+</div>
+    <h2>Filterable Table</h2>
+    <p>Type something in the input field to search the table for first names, last names or emails:</p>
+    <input id="myInput" type="text" placeholder="Search..">
+    <br><br>
+<div class="container h-100">
+    <div class="row align-items-center h-100">
+        <table class="table">
+            <tbody>
+            <div class="container h-100">
+                <div class="row align-items-center h-100">
+
+                    <tr>
+                        <th scope="row">ID</th>
+                        <th scope="row">Nom</th>
+                        <th scope="row">Etat</th>
+                        <th scope="row">Catégorie produits</th>
+                        <th scope="row">Date d'expiration pannier</th>
+                        <th scope="row">Ajouter Nouvelle Commande </th>
+                        <th scope="row">Modifier</th>
+                        <th scope="row">Suprimmer</th>
+                    </tr>
+                </div>
+            </div>
+
+            <tr >
+                {% for p in pannier %}
+            <tbody id="myTable">
+                <td>
+                    {{ p.id}}
+                </td>
+                <td>
+                    {{ p.nom }}
+                </td>
+                <td>
+                    {{ p.etat }}
+                </td>
+                <td>
+                    {{ p. categorie}}
+                </td>
+
+                <td>
+                    {{ p.dateexp|date('d-m-Y')}}
+                </td>
+                <td><a href="{{ path('adde',{'id':p.id}) }}">Ajouter Pannier</a></td>
+                <td><a href="{{ path('updateP',{'id':p.id}) }}">Modifier Pannier</a></td>
+                <td><a href="{{ path('dd',{'id':p.id}) }}">Supprimer Pannier</a></td>
+            </tr >
+            </tbody>
+            {% endfor %}
+
+        </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+        {% endblock body %}

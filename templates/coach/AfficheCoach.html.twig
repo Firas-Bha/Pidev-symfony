@@ -1,0 +1,58 @@
+
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-Ua-Compatible" Content="ie=edge">
+    </head>
+    <body>
+    <h1>Liste Des Coach</h1>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">prenom</th>
+                            <th scope="col">specialité</th>
+                            <th scope="col">adresse</th>
+                            <th scope="col">telephone</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr{% for i in Coach %}>
+                            <td>{{ i.Id }}</td>
+                            <td>{{ i.nom }}</td>
+                            <td>{{ i.prenom }}</td>
+
+                            <td>{{ i.specialite }}</td>
+                            <td>{{ i.adresse }}</td>
+                            <td>{{ i.numero }}</td>
+                            <td><a href="{{ path('updatecoach',{'id':i.id}) }}" > Update </a> </td>
+                            <td><a href="{{ path('c',{'id':i.id}) }}">Delete</a></td>
+                        </tr{% endfor %}>
+
+                        <class="navigation">
+                        <a href="{{ path('Coach_list') }}">Imprimer</a>
+                        </class>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% block body %}
+<head>
+            <style>
+                /** Define the margins of your page **/
+                @page {
+                    margin: 100px 25px;
+                }
+
+                header {
+                    position: fixed;
+                    top: -60px;
+                    left: 0px;
+                    right: 0px;
+                    height: 50px;
+
+                    /** Extra personal styles **/
+                    background-color: #ccdbf1;
+                    font-family: sans-serif;
+                    color: black;
+                    text-align: center;
+                    line-height: 35px;
+                }
+
+                footer {
+                    position: fixed;
+                    bottom: -60px;
+                    left: 0px;
+                    right: 0px;
+                    height: 50px;
+
+                    /** Extra personal styles **/
+                    background-color: #ccdbf1;
+                    font-family: sans-serif;
+                    color: black;
+                    text-align: center;
+                    line-height: 35px;
+                }
+                table {
+
+                    caption-side: bottom;
+                    text-align: center;
+                    border: medium solid #6495ed;
+                    border-collapse: collapse;
+                    width: 50%;
+                }
+                th {
+
+                    font-family: monospace;
+                    border: thin solid #6495ed;
+                    width: 50%;
+                    padding: 5px;
+                    background-color: #D0E3FA;
+                    background-image: url(sky.jpg);
+                }
+                td { ;
+                    font-family: sans-serif;
+                    border: thin solid #6495ed;
+                    width: 50%;
+                    padding: 5px;
+                    text-align: center;
+                    background-color: #ffffff;
+                }
+                caption {
+                    text-align: center;
+                    font-family: sans-serif;
+                    color: darkred;
+                }
+            </style>
+        </head>
+<header>
+    <h1 class="text-danger">Recu  de votre Commandes </h1>
+</header>
+
+<footer>
+    Copyright &copy; <?php echo date("Y");?>
+</footer>
+
+    <!-- Wrap the content of your PDF inside a main tag -->
+    <main>
+        <div class="container h-100">
+            <main class="row align-items-center h-100">
+                <table >
+                    <caption>Info commandes </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Mode Payment </th>
+                        <th scope="col">Date Reception</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+                    <tr {% for c in commande %}>
+                        <td>
+                            {{ c.id}}
+                        </td>
+                        <td>{{ c.nom }}</td>
+                        <td>{{ c.prenom}}</td>
+                        <td>
+                            {{ c.quantite }}
+                        </td>
+                        <td>
+                            {{ c.titre }}
+                        </td>
+                        <td>{{ c.prix }}</td>
+                        <td>{{ c.Total }}</td>
+                        <td>{{ c.modepay }}</td>
+                        <td>{{ c.Date|date('d-m-Y') }}</td>
+
+
+                    </tr {% endfor %}>
+                    </tbody>
+
+                </table> 
+
+
+            </main>
+        </div>
+
+            {% endblock body  %}
+
+
+</main>

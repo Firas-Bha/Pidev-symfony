@@ -1,0 +1,59 @@
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-Ua-Compatible" Content="ie=edge">
+    </head>
+    <body>
+    <h1>Liste Des Nutritionnistes</h1>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">prenom</th>
+
+                            <th scope="col">adresse</th>
+                            <th scope="col">telephone</th>
+
+
+                            <td scope="col">Delete</td>
+                            <td scope="col">modifier</td>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr{% for i in Nutritionniste%}>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.NomNut }}</td>
+                            <td>{{ i.PrenomNut}}</td>
+
+                            <td>{{ i.AdresseNut}}</td>
+                            <td>{{ i.NumNut }}</td>
+                            <td><a href="{{ path('n',{'id':i.id}) }}">Delete</a></td>
+                            <td><a href="{{ path('updatenut',{'id':i.id}) }}">Update</a></td>
+
+                        </tr{% endfor %}>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}

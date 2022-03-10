@@ -1,0 +1,47 @@
+
+
+{% block body %}
+
+    <h1 align="center">liste des Staffs</h1><hr>
+
+
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">prenom</th>
+                            <th scope="col">sexe</th>
+                            <th scope="col">adresse</th>
+                            <th scope="col">telephone</th>
+                            <th scope="col">email</th>
+                            <th scope="col">poste</th>
+                            <th scope="col">date entree</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                         {% for s in Staff %}
+                             <tr>
+                            <td>{{ s.id }}</td>
+                            <td>{{ s.nomstaff }}</td>
+                            <td>{{ s.prenomstaff }}</td>
+
+                            <td>{{ s.sexe }}</td>
+                            <td>{{ s.adresse }}</td>
+                            <td>{{ s.telephone}}</td>
+                            <td>{{ s.email }}</td>
+                            <td>{{ s.poste }}</td>
+                            <td>{{ s.DateEntree }}</td>
+                             </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+
+
+
+
+{% endblock %}

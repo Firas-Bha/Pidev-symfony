@@ -1,0 +1,27 @@
+<h1 align="center" style="color: Blue"><b>Liste des événements</b></h1>
+{% block stylesheets %}  {% endblock %}
+
+<body>
+    {% for i in events %}
+
+
+        <h3  style="text-align: center">{{i.nom}}</h3>
+        <div align="center">
+            <img src="{{'uploads/' ~ i.Image }}"  style="max-height: 250px; width: 400px" />
+        </div>
+
+        <h4 style="text-align: center">{{ i.getDate()|date('d-m-Y ') }}</h4>
+        <h4 style="text-align: center">{{i.Description}}</h4>
+        <h5>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</h5>
+        <br> </br>
+    {% endfor %}
+    <h4 align="center" style="color: DarkBlue"><b>Svp notez que une réservation est obligatoire pour participer à un évenement</b></h4>
+    <div style="margin-left: 480px;font-size: 15px" align="center"> Avec toutes nos voeux sincéres L'équipe de Xtreme_gym  </div>
+    <br>
+    <img src="{{ ('uploads/signature.png') }}" style="width: 150px;height: 50px;margin-left: 525px" alt="">
+    </div>
+
+</body>
+
+
+

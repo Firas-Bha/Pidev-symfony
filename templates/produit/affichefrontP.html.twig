@@ -1,0 +1,90 @@
+{% extends 'base-front.html.twig' %}
+
+
+
+
+
+
+
+
+{% block stylesheets %} {% endblock %}
+{% block body %}
+    <section class="pricing-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Nos Produits Disponibles</span>
+                        <h2>Merci pour votre Confiance</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-15 col-md-15">
+                <div class="ps-item">
+
+                    <div >
+                        <input  id="myInput" type="text"  >
+
+                    </div>
+
+                    <section >
+                        <br><br><section >
+                            <br><br>
+
+                            <div style="margin-left:1000px;">
+                                <a class="btn btn-info" href="{{path('produit_list')}}"> Exporter PDF </a>
+                                <a class="btn btn-info" href="{{path('Afficp')}}"> Ajouter au pannier</a>
+
+                            </div>
+
+                            <br> </br>
+
+                            {%  for i in p %}
+
+                                <table class="container">
+                                    <tbody id="myTable">
+                                    <tr>
+                                        <td>
+
+                                            <img src="{{ asset('uploads/' ~ i.image ) }}" >
+                                            <h3  style="text-align: center">{{i.nomP}}</h3>
+                                            <h4 style="text-align: center">{{ i.dateP()|date('d-m-Y ') }}</h4>
+                                            <h4>{{ i.categorie.nomC }}</h4>
+                                            <br> </br>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            {% endfor %}
+
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            <script>
+                                $(document).ready(function(){
+                                    $("#myInput").on("keyup", function() {
+                                        var value = $(this).val().toLowerCase();
+                                        $("#myTable tr").filter(function() {
+                                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                        });
+                                    });
+                                });
+                            </script>
+
+                        </section>
+
+
+
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- start Gist JS code-->
+    <script>
+        (function(d,h,w){var gist=w.gist=w.gist||[];gist.methods=['trackPageView','identify','track','setAppId'];gist.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);gist.push(e);return gist;}};for(var i=0;i<gist.methods.length;i++){var c=gist.methods[i];gist[c]=gist.factory(c)}s=d.createElement('script'),s.src="https://widget.getgist.com",s.async=!0,e=d.getElementsByTagName(h)[0],e.appendChild(s),s.addEventListener('load',function(e){},!1),gist.setAppId("uxued3m3"),gist.trackPageView()})(document,'head',window);
+    </script>
+    <!-- end Gist JS code-->
+{% endblock %}
+
+        {% block javascripts %} {% endblock %}

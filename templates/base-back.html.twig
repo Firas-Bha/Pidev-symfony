@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title> {% block title %}Template{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{{ asset('back-end/img/favicon.ico') }}" rel="icon">
+
+    <!-- Calendrier CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.2/main.min.css" integrity="sha256-lQnxfLYgySmY6nHM7LkVqcS2RdJvFUV2p6FHg04SZN4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    {% block stylesheets %} {% endblock %}
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ asset('back-end/lib/owlcarousel/assets/owl.carousel.min.css"') }}" rel="stylesheet>
+    <link href="{{ asset('back-end/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ asset('back-end/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ asset('back-end/css/style.css') }}"  rel="stylesheet" >
+
+</head>
+
+
+<body>
+
+    <!-- Sidebar Start -->
+    <div class="sidebar pe-4 pb-3">
+        <nav class="navbar bg-light navbar-light">
+            <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Xtreme Gym</h3>
+            </a>
+            <div class="d-flex align-items-center ms-4 mb-4">
+                <div >
+                    <img class="rounded-circle "  src="{{ asset('back-end/img/Logo_VF (2).png')}}" alt="" style="width: 80px; height: 80px;">
+                    <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                </div>
+                <div class="ms-3">
+
+                </div>
+            </div>
+
+            <div class="navbar-nav w-100">
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Evenements</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('afficheE')}}" class="dropdown-item">Liste des Evenements</a>
+                        <a href="{{path('ajoutE')}}" class="dropdown-item">Ajouter un Evenement</a>
+                        <a href="element.html" class="dropdown-item">Other Elements</a>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Réservation</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{path('afficheRadmin')}}" class="dropdown-item">Liste des Réservations</a>
+                            <a href="{{path('ajoutResAdmin')}}" class="dropdown-item">Ajouter une Réservation</a>
+                            <a href="{{path('stats')}}" class="dropdown-item">Statistique des Réservation</a>
+                            <a href="{{path('contact')}}" class="dropdown-item">Contact</a>
+                            <a href="element.html" class="dropdown-item">Other Elements</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Calendrier</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{path('afficheCalendar')}}" class="dropdown-item">Calendrier</a>
+                            <a href="{{path('calendar_index')}}" class="dropdown-item">Ajouter à Calendrier</a>
+                            <a href="element.html" class="dropdown-item">Other Elements</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Produits</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{path('afficheP')}}" class="dropdown-item">Liste des Produits</a>
+                            <a href="{{path('ajoutP')}}" class="dropdown-item">Ajouter un Produit</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Catégorie</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('afficheCA')}}" class="dropdown-item">Liste des Catégories</a>
+                        <a href="{{path('ajoutC')}}" class="dropdown-item">Ajouter une Catégorie</a>
+                        <a href="element.html" class="dropdown-item">Other Elements</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Livraison</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="/livraison/" class="dropdown-item">Liste des Livraison</a>
+                        <a href="{{ path('livraison_new') }}" class="dropdown-item">Ajouter Livraison</a>
+
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Salles</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                       <a href="{{path('afficheS')}}" class="dropdown-item">Liste des Salles</a>
+                        <a href="{{path('AjoutSalle')}}" class="dropdown-item">Ajouter Salle</a>
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Cours</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('afficheC')}}" class="dropdown-item">Liste des Cours</a>
+                        <a href="{{path('ajoutercours')}}" class="dropdown-item">Ajouter Cour</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Commandes</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('affiche')}}" class="dropdown-item">Liste des Commandes</a>
+
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Paniers</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('affichee')}}" class="dropdown-item">Liste des Paniers</a>
+
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Clients</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('AfficheClient')}}" class="dropdown-item">Afficher Client</a>
+
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Nutritionniste</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('AfficheNut')}}" class="dropdown-item">Afficher Nutritionniste</a>
+                        <a href="{{path('Addnut')}}" class="dropdown-item">Ajouter Nutritionniste</a>
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Staff</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('affichestaff')}}" class="dropdown-item">Afficher Staff</a>
+                        <a href="{{path('Addstaff')}}" class="dropdown-item">Ajouter Staff</a>
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Coach</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{path('AfficheCoach')}}" class="dropdown-item">Afficher Coach</a>
+                        <a href="{{path('Addcoach')}}" class="dropdown-item">Ajouter Coach</a>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="signin.html" class="dropdown-item">Sign In</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                        <a href="404.html" class="dropdown-item">404 Error</a>
+                        <a href="blank.html" class="dropdown-item">Blank Page</a>
+                    </div>
+                </div>
+
+        </nav>
+    </div>
+    <!-- Sidebar End -->
+
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+            <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+            </a>
+            <a href="#" class="sidebar-toggler flex-shrink-0">
+                <i class="fa fa-bars"></i>
+            </a>
+            <form class="d-none d-md-flex ms-4">
+                <input class="form-control border-0" type="search" placeholder="Search">
+            </form>
+            <div class="navbar-nav align-items-center ms-auto">
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-envelope me-lg-2"></i>
+                        <span class="d-none d-lg-inline-flex">Message</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                        <a href="#" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle" src="{{ asset('back-end/img/firas.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                    <small>15 minutes ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle" src="{{ asset('back-end/img/firas.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                    <small>15 minutes ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle" src="{{ asset('back-end/img/firas.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                    <small>15 minutes ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item text-center">See all message</a>
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <div class="navbar-nav align-items-center ms-auto">
+
+                        {% for locale in locales  %}
+                            {% if locale != app.request.locale %}
+                                <div class="nav-item ">
+                                    <a href="{{ path('change_locale',{locale:locale})}}" class="nav-link " data-bs-toggle="dropdown">
+                                        <img src="{{ asset('images/'~locale~'.png') }}" alt="{{ locale }}">
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-bell me-lg-2"></i>
+                        <span class="d-none d-lg-inline-flex">Notificatin</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                        <a href="#" class="dropdown-item">
+                            <h6 class="fw-normal mb-0">Profile updated</h6>
+                            <small>15 minutes ago</small>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">
+                            <h6 class="fw-normal mb-0">New user added</h6>
+                            <small>15 minutes ago</small>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">
+                            <h6 class="fw-normal mb-0">Password changed</h6>
+                            <small>15 minutes ago</small>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item text-center">See all notifications</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- Navbar End -->
+        {% block body  %} {% endblock %}
+
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-light rounded-top p-4">
+                <div class="row">
+                    <div class="col-12 col-sm-6 text-center text-sm-start">
+                        &copy; <a href="#">Xtreme_Gym</a>, All Right Reserved.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+    </div>
+    <!-- Content End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+
+    <!-- Calendrier JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.2/main.min.js" integrity="sha256-YK3r7IQuHVY5YtEUbGuFMcwtIYCRtRKpZyMej0emzBc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- JavaScript Libraries -->
+
+{% block javascripts %} {% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('back-end/lib/chart/chart.min.js')}}"></script>
+<script src="{{ asset('back-end/lib/easing/easing.min.js')}}"></script>
+<script src="{{ asset('back-end/lib/waypoints/waypoints.min.js')}}"></script>
+<script src="{{ asset('back-end/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+<script src="{{ asset('back-end/lib/tempusdominus/js/moment.min.js')}}"></script>
+<script src="{{ asset('back-end/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+<script src="{{ asset('back-end/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+<!-- Template Javascript -->
+<script src="{{ asset('back-end/back/js/main.js')}}"></script>
+
+</body>
+
+
+</html>
+

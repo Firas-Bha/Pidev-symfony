@@ -1,0 +1,102 @@
+{% extends 'base-back.html.twig' %}
+{% block title%} Liste des Produits {% endblock %}
+
+{% block body %}
+    <h2>Produits</h2>
+    <p>Type something in the input field to search for your products:</p>
+    <input id="myInput" type="text" placeholder="Search..">
+    <br><br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+    <table id="produits" class="table table-striped">
+
+        <thead>
+        <tr>
+
+            <td>Reference</td>
+            <td>Libelle</td>
+            <td>Nom</td>
+            <td>Nombre</td>
+            <td>Prix</td>
+            <td>Marque</td>
+            <td>Reduction</td>
+            <td>Date</td>
+            <td>NomCategorie</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in p %}
+        <tbody id="myTable">
+            <tr>
+
+
+                <td>{{ i.id }}</td>
+                <td>{{ i.libelle }}</td>
+                <td>{{ i.nomP }}</td>
+                <td>{{ i.nombre }}</td>
+                <td>{{ i.prix }}</td>
+                <td>{{ i.marque }}</td>
+                <td>{{ i.reduction }}</td>
+                <td>{{ i.dateP|date("d/m/Y")  }}</td>
+                <td>{{ i.categorie.nomC }}</td>
+                <td>
+                    <form action="{{ path('ajoutP',{'id':i.id}) }}">
+                        <button>Ajouter</button></form>
+
+                </td>
+
+                <td>
+                    <form action="{{ path('suppP',{'id':i.id}) }}">
+                        <button>Supprimer</button></form>
+
+                </td>
+                </td>
+                <td>
+                    <form action="{{ path('modifP',{'id':i.id}) }}">
+                        <button>Modifier</button></form>
+
+                </td>
+                <td>
+                    <form action="{{ path('produit_list',{'id':i.id}) }}">
+                        <button>Imprimer</button></form>
+
+                </td>
+
+
+
+
+            </tr>
+        </tbody>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}

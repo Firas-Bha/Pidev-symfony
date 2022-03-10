@@ -1,0 +1,82 @@
+{% extends 'base-front.html.twig' %}
+
+
+
+
+
+
+
+
+{% block stylesheets %} {% endblock %}
+{% block body %}
+    <section class="pricing-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Nos Evenements</span>
+                        <h2>Une Réservation est obligatoire</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-15 col-md-15">
+                <div class="ps-item">
+
+    <div >
+        <input  id="myInput" type="text"  >
+
+    </div>
+
+    <section >
+    <br><br><section >
+        <br><br>
+
+    <div style="margin-left:1000px;">
+        <a class="btn btn-info" href="{{path('pdf')}}"> Exporter PDF </a>
+    </div>
+
+    <br> </br>
+
+    {%  for i in ev %}
+
+        <table class="container">
+            <tbody id="myTable">
+            <tr>
+                <td>
+
+                <img src="{{ asset('uploads/' ~ i.image ) }}" >
+        <h3  style="text-align: center">{{i.nom}}</h3>
+        <a class="btn btn-danger" href="{{ path('ajoutR') }}"> Réserver </a>
+        <h4 style="text-align: center">{{ i.getDate()|date('d-m-Y H:i:s') }}</h4>
+        <h4 style="text-align: center">{{i.Description}}</h4>
+        <br> </br>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+    </section>
+
+    {{ knp_pagination_render(ev) }}
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+        {% block javascripts %} {% endblock %}

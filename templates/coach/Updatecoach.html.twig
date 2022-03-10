@@ -1,0 +1,8 @@
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+<h1> Update Coach</h1>
+    {{ form_start(fo,{'attr': {'novalidate': 'novalidate'}} ) }}
+    {{ form_widget(fo) }}
+    {{ form_end(fo) }}
+{% endblock %}

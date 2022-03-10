@@ -1,0 +1,42 @@
+{% extends 'nutritionniste/base-back-nutritionniste.html.twig' %}
+
+{% block body %}
+
+      <h1>Ajouter Nutritionnistes </h1>
+
+
+  {{ form_start(f,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+ <table>
+  <tr>
+    <td>{{ form_label(f.nom_nut) }}</td>
+    <td>{{ form_widget(f.nom_nut) }}</td>
+
+
+
+
+  </tr>
+    <tr>
+        <td>{{ form_label(f.PrenomNut) }}</td>
+        <td>{{ form_widget(f.PrenomNut) }}</td>
+
+    </tr>
+    <tr>
+        <td>{{ form_label(f.adresseNut) }}</td>
+        <td>{{ form_widget(f.adresseNut) }}</td>
+
+    </tr>
+    <tr>
+        <td>{{ form_label(f.num_nut) }}</td>
+        <td>{{ form_widget(f.num_nut) }}</td>
+
+    </tr>
+
+
+
+ </table>
+    <button > ajouter </button>
+{{ form_end(f) }}
+
+  <a href="AfficheNut" class="primary-btn">afficher toute la liste!</a>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <button type="submit" class="btn btn-square btn-outline-secondary m-2"><a href="{{ path('afficheC') }}"><i class="fa fa-home"></i></a></button>
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <div class="bg-light text-center rounded p-4">
+            <h1>{%trans %}Répartition de nombre de serie par cours{% endtrans %}</h1>
+
+            <canvas id="categories" width="200" height="200"></canvas>
+
+
+            <script>
+                let categories = document.querySelector("#categories")
+                let categGraph = new Chart(categories, {
+                    type: "pie",
+                    data: {
+                        labels: {{ coursNom|raw }},
+                        datasets: [{
+                            label: "Répartition de nombre de serie par cours",
+                            data: {{ coursCount|raw }},
+                            backgroundColor: {{ coursColor|raw }}
+
+                        }]
+                    }
+                })
+                </script>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+                <h1>{%trans %}Répartition de Nombre de cours par jour{% endtrans %}</h1>
+                <canvas id="datecounts" width="200" height="200"></canvas>
+                <script>
+                    let datecounts = document.querySelector("#datecounts")
+                    let annGraph = new Chart(datecounts, {
+                        type: "bar",
+                        data: {
+                            labels: {{ dates|raw }},
+                            datasets: [{
+                                label: "{% trans %}Nombre de cours par date{% endtrans %}",
+                                data: {{ courscountbydate|raw }}
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    })
+                </script>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+

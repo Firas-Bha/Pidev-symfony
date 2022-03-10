@@ -1,0 +1,74 @@
+{% extends 'base-back.html.twig' %}
+        {% block body %}
+
+            <div class="mx-auto" style="width: 500px;">
+                <div class="font-italic">
+
+                    <h4 class="text-danger">Modifier Commandes </h4>
+                </div>
+            </div>
+
+            {{ form_start(f) }}
+            <div class="container h-100">
+                <div class="row align-items-center h-100">
+                    <table class="table">
+                        <tbody>
+                        <div class="container h-100">
+                            <div class="row align-items-center h-100">
+                                <tr>
+                                    <th scope="row">{{ form_label(f.nom) }}</th>
+                                    <td>{{ form_widget(f.nom) }} </td>
+                                    <td>{{ form_errors(f.nom) }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">{{ form_label(f.prenom) }}</th>
+                                    <td>{{ form_widget(f.prenom) }} </td>
+                                    <td>{{ form_errors(f.prenom )}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">{{ form_label(f.quantite ) }}</th>
+                                    <td>{{ form_widget(f.quantite ) }}</td>
+                                    <td>{{ form_errors(f.quantite ) }}</td>
+                                </tr>
+                            </div>
+                        </div>
+                        <tr>
+                            <th scope="row">{{ form_label(f.prix ) }}</th>
+                            <td>{{ form_widget(f.prix ) }} </td>
+                            <td>{{ form_errors(f.prix ) }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> {{ form_label(f.titre ) }}</th>
+                            <td>{{ form_widget(f.titre ) }} </td>
+                            <td>{{ form_errors(f.titre) }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{ form_label(f.Total) }}</th>
+                            <td>{{ form_widget(f.Total) }} </td>
+                            <td>{{ form_errors(f.Total) }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{ form_label(f.modepay) }}</th>
+                            <td>{{ form_widget(f.modepay) }} </td>
+                            <td>{{ form_errors(f.modepay) }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{ form_label(f.Date) }}</th>
+                            <td>{{ form_widget(f.Date) }} </td>
+                            <td>{{ form_errors(f.Date) }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container h-100">
+                <div class="row align-items-center h-100">
+                    <button class="btn btn-outline-info">update</button>
+                </div>
+            </div>
+
+            {{ form_end(f) }}
+        {% endblock body %}

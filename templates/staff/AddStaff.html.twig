@@ -1,0 +1,68 @@
+{% extends 'staff/base-back-addstaff.html.twig' %}
+{% block body %}
+<div class="mx-auto" style="width: 500px;">
+  <div class="font-italic">
+    <h4 class="text-danger">Ajouter Staff </h4>
+  </div>
+</div>
+<div class="container h-100">
+  <div class="row align-items-center h-100">
+    <table class="table">
+      <div class="container h-100">
+        <div class="row align-items-center h-100">
+
+  {{ form_start(for,{'attr': {'novalidate': 'novalidate'}} ) }}
+<table>
+  <tr>
+    <td>{{ form_label(for.nom_staff) }}</td>
+    <td>{{ form_widget(for.nom_staff) }}</td>
+    <td>{{ form_errors(for.nom_staff) }}</td>
+  </tr>
+  <tr>
+    <td>{{ form_label(for.prenom_staff) }}</td>
+    <td>{{ form_widget(for.prenom_staff) }}</td>
+    <td>{{ form_errors(for.prenom_staff) }}</td>
+  </tr>
+  <tr>
+    <td>{{ form_label(for.date_de_naiss_s) }}</td>
+    <td>{{ form_widget(for.date_de_naiss_s) }}</td>
+    <td>{{ form_errors(for.date_de_naiss_s) }}</td>
+  </tr>
+  <tr>
+    <td>{{ form_label(for.sexe) }}</td>
+    <td>{{ form_widget(for.sexe) }}</td>
+    <td>{{ form_errors(for.sexe) }}</td>
+  </tr>
+  <tr>
+    <td>{{ form_label(for.adresse) }}</td>
+    <td>{{ form_widget(for.adresse) }}</td>
+    <td>{{ form_errors(for.adresse) }}</td>
+  </tr>
+    <tr>
+    <td>{{ form_label(for.telephone) }}</td>
+    <td>{{ form_widget(for.telephone) }}</td>
+    <td>{{ form_errors(for.telephone) }}</td>
+  </tr>
+  <tr>
+    <td>{{ form_label(for.Email) }}</td>
+    <td>{{ form_widget(for.Email) }}</td>
+    <td>{{ form_errors(for.Email) }}</td>
+  </tr>
+  <tr>
+    <td>{{ form_label(for.poste) }}</td>
+    <td>{{ form_widget(for.poste) }}</td>
+    <td>{{ form_errors(for.poste) }}</td>
+  </tr>
+    <tr>
+    <td>{{ form_label(for.date_entree) }}</td>
+    <td>{{ form_widget(for.date_entree) }}</td>
+    <td>{{ form_errors(for.date_entree) }}</td>
+  </tr>
+
+</table>
+          <button> ajouter </button>
+{{ form_end(for) }}
+
+{% endblock %}
+
+

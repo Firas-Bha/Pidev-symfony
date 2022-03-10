@@ -1,0 +1,76 @@
+{% extends 'security/base-front-registration.html.twig' %}
+
+
+{% block body %}
+
+    <h1 style="color: #d39e00">Inscription!</h1>
+
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    <table>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.username,"login") }}</td>
+            <td >{{ form_widget(form.username, {'label':'login'}) }}</td>
+            <td>{{ form_errors(form.username) }}</td>
+        </tr>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.password,"Mot de passe") }}</td>
+            <td>{{ form_widget(form.password,{'label':'Mot de passe','attr':{'placeholder':'Mot de passe !'}}) }}</td>
+            <td>{{ form_errors(form.password) }}</td>
+        </tr>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.confirm_password,"confirmer mot de passe" )}}</td>
+            <td>{{ form_widget(form.confirm_password,{'label':'Confirmer Mot de passe','attr':{'placeholder':'Mot de passe again !'}})}}</td>
+            <td>{{ form_errors(form.confirm_password) }}</td>
+        </tr>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.nom_c,"Nom") }}</td>
+            <td>{{ form_widget(form.nom_c, {'label':'Nom'}) }}</td>
+            <td>{{ form_errors(form.nom_c) }}</td>
+        </tr>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.prenom_c,"Prenom") }}</td>
+            <td>{{ form_widget(form.prenom_c, {'label':'prenom'}) }}</td>
+            <td>{{ form_errors(form.prenom_c) }}</td>
+        </tr>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.date_de_naiss_c,"date de naissance") }}</td>
+            <td>{{ form_widget(form.date_de_naiss_c, {'label':'date de naissance'}) }}</td>
+            <td>{{ form_errors(form.date_de_naiss_c) }}</td>
+        </tr>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.sexe_c,"sexe") }}</td>
+            <td>{{ form_widget(form.sexe_c, {'label':'sexe'}) }}</td>
+            <td>{{ form_errors(form.sexe_c) }}</td>
+        </tr>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.adresse_c,"Adresse") }}</td>
+            <td>{{ form_widget(form.adresse_c, {'label':'adresse'}) }}</td>
+            <td>{{ form_errors(form.adresse_c) }}</td>
+        </tr>
+        <tr>
+
+            <td  class="text-white">{{ form_label(form.telephone_c,"telephone") }}</td>
+            <td>{{ form_widget(form.telephone_c, {'label':'telephone'}) }}</td>
+            <td>{{ form_errors(form.telephone_c) }}</td>
+        </tr>
+        <tr>
+
+            <td class="text-white">{{ form_label(form.email_c,"Email") }}</td>
+            <td>{{ form_widget(form.email_c, {'label':'adresse email'}) }}</td>
+            <td>{{ form_errors(form.email_c) }}</td>
+        </tr>
+
+    </table>
+
+    <button type="submit" class="btn btn-success">Inscription !</button>
+    {{ form_end(form) }}
+
+{% endblock %}

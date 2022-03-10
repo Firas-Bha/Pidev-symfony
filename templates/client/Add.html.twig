@@ -1,0 +1,74 @@
+{%  extends 'base-back.html.twig' %}
+{% block body %}
+    <div class="mx-auto" style="width: 500px;">
+        <div class="font-italic">
+            <h4 class="text-danger">Ajouter client </h4>
+        </div>
+    </div>
+    <div class="container h-100">
+    <div class="row align-items-center h-100">
+    <table class="table">
+    <div class="container h-100">
+    <div class="row align-items-center h-100">
+
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    <table>
+        <tr>
+            <td>{{ form_label(form.username) }}</td>
+            <td>{{ form_widget(form.username) }}</td>
+            <td>{{ form_errors(form.username) }}</td>
+
+
+
+        </tr>
+        <tr>
+            <td>{{ form_label(form.Password) }}</td>
+            <td>{{ form_widget(form.Password) }}</td>
+            <td>{{ form_errors(form.Password) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.nom_c) }}</td>
+            <td>{{ form_widget(form.nom_c)}}</td>
+            <td>{{ form_errors(form.nom_c) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.prenom_c) }}</td>
+            <td>{{ form_widget(form.prenom_c) }}</td>
+            <td>{{ form_errors(form.prenom_c)}}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.date_de_naiss_c) }}</td>
+            <td>{{ form_widget(form.date_de_naiss_c) }}</td>
+            <td>{{ form_errors(form.date_de_naiss_c)}}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.sexe_c) }}</td>
+            <td>{{ form_widget(form.sexe_c) }}</td>
+            <td>{{ form_errors(form.sexe_c)}}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.adresse_c) }}</td>
+            <td>{{ form_widget(form.adresse_c) }}</td>
+            <td>{{ form_errors(form.adresse_c)}}</td>
+        </tr>
+   <tr>
+            <td>{{ form_label(form.telephone_c) }}</td>
+            <td>{{ form_widget(form.telephone_c) }}</td>
+            <td>{{ form_errors(form.telephone_c)}}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.email_c) }}</td>
+            <td>{{ form_widget(form.email_c) }}</td>
+            <td>{{ form_errors(form.email_c)}}</td>
+        </tr>
+
+
+
+    </table>
+    <button type="submit" class="btn btn-success"> ajouter </button><br>
+    {{ form_end(form) }}
+
+    <br>
+    <br>
+    <a href="AfficheClient" class="primary-btn">afficher toute la liste!</a>
+{% endblock %}

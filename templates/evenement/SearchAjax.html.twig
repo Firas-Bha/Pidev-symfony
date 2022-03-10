@@ -1,0 +1,123 @@
+
+
+
+{% extends 'base-front.html.twig' %}
+ {% block contenpage %}
+     <section class="s-crossfit">
+         <div class="container">
+             <h2>Search A Post !!</h2>
+
+             <div class="sidebar-search">
+
+                 <div class="input-group custom-search-form">
+
+                     <input type="text" id="search" class="form-control" placeholder="Search here">
+                 </div>
+                 <!-- /input-group -->
+             </div>
+             <ul class="nav" id="side-menu">
+                 <li>
+                     <a href="#"><span class="fa arrow"></span></a>
+                     <div class="row" id="eventsBody" style="height: 100% ; width:150%">
+                         {% for event in evenement %}
+                             <div class="col-md-4 crossfit-col">
+                                 <div class="crossfit-item">
+                                     <div class="border border-dark rounded p-4 clearfix" style="height: 50%; width:100%">
+                                         <p style="color: #FFFFFF">{{ event.Nom }}</p>
+                                         <p style="color: #FFFFFF">{{ event.Date}}</p>
+                                         <p style="color: #FFFFFF">{{ event.type}}</p>
+                                         <p style="color: #FFFFFF">{{ event.lieu}}</p>
+                                         <p style="color: #FFFFFF">{{ event.description}}</p>
+                                         <td><img class="-google-plus-circle" src="{{ asset('/uploads/images/') ~event.image}}" alt="evenement" }}></td>
+                                         <hr>
+                                         <ul>
+                                             <li><a href="{{ path('Ajoute-reserve') }}" class="btn btn-dark" style="color: #FFFFFF"><p>Réserver</p></a></li>
+                                         </ul>
+                                     </div>
+                                 </div>
+                             </div>
+                         {% endfor %}
+                     </div>
+                 </li>
+             </ul><br><br><br><br>
+             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+             <script type="text/javascript">
+                 jQuery(document).ready(function() {
+                     var searchRequest = null;
+                     $("#search").keyup(function() {
+                         var minlength = 1;
+                         var that = this;
+                         var value = $(this).val();
+                         var entitySelector = $("#entitiesNav").html('');
+                         if (value.length >= minlength ) {
+                             if (searchRequest != null)
+                                 searchRequest.abort();
+                             searchRequest = $.ajax({
+                                 type: "GET",
+                                 url: "{{ path('ajax_search') }}",
+                                 data: {
+                                     'q' : value
+                                 },
+                                 dataType: "json",
+                                 success: function(msg){
+
+                                     console.log(Object.keys(msg))
+
+                                     $('#eventsBody').empty()
+                                     if(Object.keys(msg)[0] !== "message") {
+                                         Object.keys(msg).forEach(i => {
+                                             console.log(msg[i].nom)
+                                             $('#eventsBody').append(
+                                                 `<div class="row" style="height: 50% ; width:100%">
+                                                       <div class="col-md-4 crossfit-col" style="height: 50% ; width:100%">
+                                                        <div class="crossfit-item" style="height: 50% ; width:100%">
+                                                            <div class="border border-dark rounded p-4 clearfix" style="height: 50%; width:100%">
+                                                                <p style="color: #FFFFFF">${msg[i].nom }</p>
+                                                                <p style="color: #FFFFFF">${msg[i].Date}</p>
+                                                                <p style="color: #FFFFFF">${msg[i].type}</p>
+                                                                <p style="color: #FFFFFF">${msg[i].lieu}</p>
+                                                                <p style="color: #FFFFFF">${msg[i].description}</p>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                  </div>`
+                                             )
+                                         })
+                                     } else {
+                                         $('#eventsBody').html("<h3>Aucun événement trouvé!!!</h3>")
+                                     }
+
+
+
+
+
+
+
+                                     //we need to check if the value is the same
+                                     /* if (value===$(that).val()) {
+                                          var result = JSON.parse(msg);
+                                          $.each(result, function(key, arr) {
+                                              $.each(arr, function(id, value) {
+                                                  if (key === 'posts') {
+                                                      if (id !== 'error') {
+                                                          console.log(value[1]);
+           nd('<li><b>'+value[1]+'</b><a href="/detailedpost/'+id+'">'+'<img src="/uploads/post/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+                                                      } else {
+                                                          entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                      }
+                                                  }
+                                              });
+                                          });
+                                      }*/
+                                 }
+                             });
+                         }
+                     });
+                 });
+             </script>
+
+         </div>
+     </section>
+
+ {% endblock %}

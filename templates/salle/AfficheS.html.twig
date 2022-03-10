@@ -1,0 +1,108 @@
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-Ua-Compatible" Content="ie=edge">
+    </head>
+    <body>
+
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+
+                        <div align="center">
+                            <form method="post" action="{{ path('recherche') }}">
+                                <input type="text" name="search" class="btn btn-outline-info">
+                                <input type="submit" value="{% trans %}Recherche{% endtrans %}" class="btn btn-info">
+                            </form>
+                        </div>
+                    <div class="bg-light rounded h-1 p-4">
+                    </div>
+
+                    <h1 align="center" class="p-2 mb-2 bg-info text-white">{% trans %}Liste Des Salles{% endtrans %}</h1>
+                    <div align="left">
+                        <button type="submit" class="btn btn-outline-info"><a href="{{ path('AjoutSalle') }}">{% trans %}Ajouter{% endtrans %}</a></button>
+                    </div>
+
+
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i>
+                        {% set flashbag_notices=app.session.flashbag.get('notice') %}
+                        {% if flashbag_notices is not empty %}
+
+                            <ul>
+                                {% for notice in flashbag_notices%}
+                                    {{ notice }}
+                                {% endfor %}
+                            </ul>
+
+                        {% endif %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">{% trans %}Numero{% endtrans %}</th>
+                            <th scope="col">{% trans %}Surface{% endtrans %}</th>
+                            <th scope="col">{% trans %}Nom{% endtrans %}</th>
+                            <th scope="col">{% trans %}Capacite{% endtrans %}</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">{% trans %}Nombre max de cours{% endtrans %}</th>
+                            <th scope="col">{% trans %}Supprimer{% endtrans %}</th>
+                            <th scope="col">{% trans %}Modifier{% endtrans %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for s in salle %}
+                            <tr>
+                                <th scope="row"> {{ s.Id }} </th>
+                                <td> {{ s.Surface }} </td>
+                                <td> {{ s.NomS}} </td>
+                                <td> {{ s.CapaciteS}} </td>
+                                <td> {{ s.description}} </td>
+                                <td> {{ s.nbCoursMaxS}} </td>
+                                <td><button type="submit" class="btn btn-info text-white"> <a href="{{ path('sup',{'Id':s.Id}) }}" class="text-white">{% trans %}Supprimer{% endtrans %}</a> </button></td>
+                                <td><button type="submit" class="btn btn-info "> <a href="{{ path('mod',{'Id':s.Id}) }}" class="text-white">{% trans %}Modifier{% endtrans %}</a></button></td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <ul class="pagination">
+                        <li class=" {{ (page == 1) ? 'disabled' : ''}}">
+                            <a href="{{ (page >1) ? '?page=' ~ (page -1) : '' }}">
+                                <i class="fas fa-angle-double-left"></i>
+                            </a>
+                        </li>
+
+                        {% set pages = (total/limit)|round(0,'ceil') %}
+                        {% for item in 1..pages %}
+                            <li class="btn btn-sm-square btn-toolbar btn-outline-info {{ (page == item) ?'active':''}}">
+                                <a href="?page={{ item }}">{{ item }}</a>
+                            </li>
+                        {% endfor %}
+
+                        <li class=" {{ (page == pages) ? 'disabled' : ''}}">
+                            <a href="{{ (page < pages) ? '?page=' ~ (page +1) : '' }}">
+                                <i class="fas fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}
