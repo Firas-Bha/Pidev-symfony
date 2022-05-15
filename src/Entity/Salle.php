@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass=SalleRepository::class)
  * @UniqueEntity("Id")
@@ -54,7 +55,7 @@ class Salle
      * @Assert\Regex(
      *     pattern = "/^[0-9]{1,}\,{0,1}[0-9]{0,}$/",
      *     message = "La capacité doit etre un entier positif."
-     *     )
+     * )
      */
     private $CapaciteS;
 

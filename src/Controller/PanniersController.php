@@ -13,6 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse ;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Validator\Constraints\Json;
+
 class PanniersController extends AbstractController
 {
     /**
@@ -148,5 +156,106 @@ class PanniersController extends AbstractController
     }
 
 
+//json
+    /**
+     * @Route("getp",name="getp")
+     * @Method("GET")
+     */
+
+    public function getp(PanniersRepository $repository,SerializerInterface $serializerinterface) {
+        //For avoiding Collection issues of ManyToOne || OneToMany || ManyToMany
+        //relationship between 2 entities
+        return $this->json(
+            json_decode(
+                $serializerinterface->serialize(
+                    $repository->findAll(),
+                    'json',
+                    [AbstractNormalizer::IGNORED_ATTRIBUTES => ['commandes']]
+                ),
+                JSON_OBJECT_AS_ARRAY
+            )
+        );
+
+       // $pannier = $repository->findAll();
+        //$json=$serializerinterface->serialize($pannier,'json',['groups'=>'post:hey']);
+        // dump($commande);
+        // die;
+        //return new Response($json);
+    }
+    /**
+     * @Route("addpjson", name="addpjson")
+     */
+
+    public function addpjson(Request $request)
+    {
+        $pannier = new Panniers();
+        //req
+        $nom = $request->query->get("nom");
+        $etat = $request->query->get("etat");
+        $categorie = $request->query->get("categorie");
+        $dateexp = new \DateTime('now');
+        //set
+        $pannier->setNom($nom);
+        $pannier->setEtat($etat);
+        $pannier->setCategorie($categorie);
+        $pannier->setDateexp($dateexp);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($pannier);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize("panniers ajoute avec succes.");
+        return new JsonResponse($formatted);
+
+    }
+    /**
+     * @Route("/updatepjson", name="updatepjson")
+     */
+    public function updatepjson(Request $request) {
+        //req
+        //
+        $id = $request->get("id");
+        $pannier=$this->getDoctrine()->getManager()->getRepository(Panniers::class)->find($id);
+
+        //req
+        $nom = $request->query->get("nom");
+        $etat = $request->query->get("etat");
+        $categorie = $request->query->get("categorie");
+        $dateexp = new \DateTime('now');
+        //set
+        $pannier->setNom($nom);
+        $pannier->setEtat($etat);
+        $pannier->setCategorie($categorie);
+        $pannier->setDateexp($dateexp);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($pannier);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($pannier);
+        return new JsonResponse("Panniers modifiee avec success.");
+
+    }
+
+    /**
+     * @Route("/deletepjson", name="deletepjson")
+     */
+
+    public function deletepjson(Request $request) {
+
+        $id = $request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $pannier = $em->getRepository(Panniers::class)->find($id);
+        if($pannier!=null ) {
+            $em->remove($pannier);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("pannier supprime avec succes.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id programme invalide.");
+
+
+    }
 
 }

@@ -390,6 +390,7 @@ class EvenementController extends AbstractController
     }
 
     /**
+     * 
      * @Route("/displayEvenementJSON", name="displayEvenementJSON")
      * @Method("GET")
      */

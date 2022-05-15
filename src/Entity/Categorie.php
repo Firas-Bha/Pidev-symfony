@@ -3,42 +3,30 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use JsonSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=CategorieRepository::class)
  */
-class Categorie
+class Categorie implements JsonSerializable
 {
     /**
      * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *   * @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Your name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your  name cannot be longer than {{ limit }} characters",
-     *      allowEmptyString = false
-     * )
      */
     private $nomC;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Your type must be at least {{ limit }} characters long",
-     *      maxMessage = "Your type name cannot be longer than {{ limit }} characters",
-     *      allowEmptyString = false
-     * )
      */
     private $type;
 
@@ -49,9 +37,6 @@ class Categorie
 
     /**
      * @ORM\Column(type="integer")
-     * * @Assert\NotEqualTo(
-     *     value = 0
-     *     )
      */
     private $CategorieOrder;
 
@@ -86,6 +71,7 @@ class Categorie
     {
         return $this->type;
     }
+
     public function setID(string $id): self
     {
         $this->id = $id;
@@ -153,4 +139,22 @@ class Categorie
 
         return $this;
     }
+
+    public function jsonSerialize(): array
+    {
+        return array(
+            'id' => $this->id,
+            'nomC' => $this->nomC,
+            'type' => $this->type
+        );
+    }
+
+    public function setUp($nomC, $type, $sexe, $CategorieOrder)
+    {
+        $this->nomC = $nomC;
+        $this->type = $type;
+        $this->sexe = $sexe;
+        $this->CategorieOrder = $CategorieOrder;
+    }
+
 }

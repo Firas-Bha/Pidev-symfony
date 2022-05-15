@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use JsonSerializable;
 use App\Repository\LivraisonRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=LivraisonRepository::class)
  */
-class Livraison
+class Livraison implements JsonSerializable
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -19,21 +21,11 @@ class Livraison
 
     /**
      * @ORM\Column(type="integer")
-     * * @Assert\NotEqualTo(
-     *     value = 0
-     *     )
      */
     private $numL;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *   * @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Your name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your  name cannot be longer than {{ limit }} characters",
-     *      allowEmptyString = false
-     * )
      */
     private $nomLivreur;
 
@@ -47,22 +39,22 @@ class Livraison
      */
     private $dateLivraison;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Commandes::class, inversedBy="livraisons")
-     */
-    private $numcmd;
-    public function getid(): ?string
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setid(string $id): self
+    public function getNumL(): ?int
     {
-        $this->id = $id;
+        return $this->numL;
+    }
+
+    public function setNumL(int $numL): self
+    {
+        $this->numL = $numL;
 
         return $this;
     }
-
 
     public function getNomLivreur(): ?string
     {
@@ -99,38 +91,23 @@ class Livraison
 
         return $this;
     }
-    public function getNumL(): ?int
+
+    public function jsonSerialize(): array
     {
-        return $this->numL;
+        return array(
+            'id' => $this->id,
+            'numL' => $this->numL,
+            'nomLivreur' => $this->nomLivreur,
+            'telLivreur' => $this->telLivreur,
+            'dateLivraison' => $this->dateLivraison->format("d-m-Y"),
+        );
     }
 
-    public function setNumL(int $numL): self
+    public function setUp($numL, $nomLivreur, $telLivreur, $dateLivraison)
     {
         $this->numL = $numL;
-
-        return $this;
-    }
-    public function getNomcm(): ?commandes
-    {
-        return $this->nomcm;
-    }
-
-    public function setNomcm(?commandes $nomcm): self
-    {
-        $this->nomcm = $nomcm;
-
-        return $this;
-    }
-
-    public function getNumcmd(): ?Commandes
-    {
-        return $this->numcmd;
-    }
-
-    public function setNumcmd(?Commandes $numcmd): self
-    {
-        $this->numcmd = $numcmd;
-
-        return $this;
+        $this->nomLivreur = $nomLivreur;
+        $this->telLivreur = $telLivreur;
+        $this->dateLivraison = $dateLivraison;
     }
 }

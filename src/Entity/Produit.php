@@ -2,48 +2,35 @@
 
 namespace App\Entity;
 
+use JsonSerializable;
 use App\Repository\ProduitRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
  */
-class Produit
+class Produit implements JsonSerializable
 {
+
     /**
      * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
-     * * @Assert\NotEqualTo(
-     *     value = 0
-     * )
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Your  nameP must be at least {{ limit }} characters long",
-     *      maxMessage = "Your nameP cannot be longer than {{ limit }} characters",
-     *      allowEmptyString = false
-     * )
      */
     private $nomP;
 
     /**
      * @ORM\Column(type="integer")
-     * * @Assert\NotEqualTo(
-     *     value = 0
-     * )
      */
     private $nombre;
 
@@ -59,20 +46,11 @@ class Produit
 
     /**
      * @ORM\Column(type="date")
-     * * @Assert\Date
-     * @var string A "Y-m-d" formatted value
      */
     private $dateP;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Your marque must be at least {{ limit }} characters long",
-     *      maxMessage = "Your marque cannot be longer than {{ limit }} characters",
-     *      allowEmptyString = false
-     * )
      */
     private $marque;
 
@@ -86,19 +64,6 @@ class Produit
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Panniers::class, mappedBy="nmp")
-     */
-    private $panniers;
-
-    public function __construct()
-    {
-        $this->panniers = new ArrayCollection();
-    }
-
-
-
 
     public function getId(): ?int
     {
@@ -133,12 +98,14 @@ class Produit
     {
         return $this->nombre;
     }
+
     public function setId(int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
+
     public function setNombre(int $nombre): self
     {
         $this->nombre = $nombre;
@@ -218,37 +185,32 @@ class Produit
         return $this;
     }
 
-    /**
-     * @return Collection<int, Panniers>
-     */
-    public function getPanniers(): Collection
+    public function jsonSerialize(): array
     {
-        return $this->panniers;
+        return array(
+            'id' => $this->id,
+            'libelle' => $this->libelle,
+            'nomP' => $this->nomP,
+            'nombre' => $this->nombre,
+            'prix' => $this->prix,
+            'reduction' => $this->reduction,
+            'dateP' => $this->dateP->format("d-m-Y"),
+            'marque' => $this->marque,
+            'categorie' => $this->categorie,
+            'image' => $this->image,
+        );
     }
 
-    public function addPannier(Panniers $pannier): self
+    public function setUp($libelle, $nomP, $nombre, $prix, $reduction, $dateP, $marque, $categorie, $image)
     {
-        if (!$this->panniers->contains($pannier)) {
-            $this->panniers[] = $pannier;
-            $pannier->setNmp($this);
-        }
-
-        return $this;
+        $this->libelle = $libelle;
+        $this->nomP = $nomP;
+        $this->nombre = $nombre;
+        $this->prix = $prix;
+        $this->reduction = $reduction;
+        $this->dateP = $dateP;
+        $this->marque = $marque;
+        $this->categorie = $categorie;
+        $this->image = $image;
     }
-
-    public function removePannier(Panniers $pannier): self
-    {
-        if ($this->panniers->removeElement($pannier)) {
-            // set the owning side to null (unless already changed)
-            if ($pannier->getNmp() === $this) {
-                $pannier->setNmp(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-
-
 }

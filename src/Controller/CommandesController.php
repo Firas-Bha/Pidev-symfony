@@ -15,6 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse ;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Validator\Constraints\Json;
+
 
 class CommandesController extends AbstractController
 {
@@ -183,4 +191,115 @@ class CommandesController extends AbstractController
         return $this->render('base-front/commandes/contact.html.twig',['contactForm' => $form->createView()]);
     }
 
+    /**
+     * @Route("/getcmd",name="getcmd")
+     */
+
+    public function getcmd(CommandesRepository $repository,SerializerInterface $serializerinterface) {
+        $commande = $repository->findAll();
+        $json=$serializerinterface->serialize($commande,'json',['groups'=>'post:read']);
+        // dump($commande);
+        // die;
+        return new Response($json);
+
+
+    }
+
+    /**
+     * @Route("/addjson", name="addjson")
+     */
+
+    public function addjson(Request $request)
+    {
+        $commande = new Commandes();
+        //req
+        $quantite = $request->query->get("quantite");
+        $titre = $request->query->get("titre");
+        $prix = $request->query->get("prix");
+        $Nom = $request->query->get("Nom");
+        $prenom= $request->query->get("prenom");
+        $Total = $request->query->get("Total");
+        $modepay = $request->query->get("modepay");
+        $email = $request->query->get("email");
+        $Panniers= $request->query->get("Panniers");
+        $Date = new \DateTime('now');
+        //set
+        $commande->setQuantite($quantite);
+        $commande->setTitre($titre);
+        $commande->setPrix($prix);
+        $commande->setNom($Nom);
+        $commande->setPrenom($prenom);
+        $commande->setTotal($Total);
+        $commande->setModepay($modepay);
+        $commande->setEmail($email);
+        $commande->setPanniers($Panniers);
+        $commande->setDate($Date);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($commande);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize("Commande ajoute avec succes.");
+        return new JsonResponse($formatted);
+
+    }
+
+
+    /**
+     * @Route("/updatejson", name="updatejson")
+     */
+    public function updatejson(Request $request) {
+        //req
+        $id = $request->get("id");
+        $commande=$this->getDoctrine()->getManager()->getRepository(Commandes::class)->find($id);
+        $quantite = $request->query->get("quantite");
+        $titre = $request->query->get("titre");
+        $prix = $request->query->get("prix");
+        $Nom = $request->query->get("Nom");
+        $prenom= $request->query->get("prenom");
+        $Total = $request->query->get("Total");
+        $modepay = $request->query->get("modepay");
+        $email = $request->query->get("email");
+        $Panniers= $request->query->get("Panniers");
+        $Date = new \DateTime('now');
+        //set
+        $commande->setQuantite($quantite);
+        $commande->setTitre($titre);
+        $commande->setPrix($prix);
+        $commande->setNom($Nom);
+        $commande->setPrenom($prenom);
+        $commande->setTotal($Total);
+        $commande->setModepay($modepay);
+        $commande->setEmail($email);
+        $commande->setPanniers($Panniers);
+        $commande->setDate($Date);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($commande);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commande);
+        return new JsonResponse("Programme modifiee avec success.");
+
+    }
+    /**
+     * @Route("/deletejson", name="deletejson")
+     */
+
+    public function deletejson(Request $request) {
+
+        $id = $request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $commande = $em->getRepository(Commandes::class)->find($id);
+        if($commande!=null ) {
+            $em->remove($commande);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("commandes supprime avec succes.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id programme invalide.");
+
+
+    }
 }

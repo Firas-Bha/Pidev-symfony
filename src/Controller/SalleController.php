@@ -15,6 +15,20 @@ use Symfony\Component\Form\isSubmitted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\HttpFoundation;
 
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse ;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
+
+
+use Symfony\Component\Validator\Constraints\Json;
+
+
 class SalleController extends AbstractController
 {
     /**
@@ -139,6 +153,138 @@ class SalleController extends AbstractController
 
         return $this->render('salle/search.html.twig', [
             'salle'=>$salle]);
+
+    }
+
+    /**
+     *
+     * @Route("get", name="get")
+     * @Method("GET")
+     */
+    public function allSalleAction(SerializerInterface $serializer, SalleRepository $repository)
+    {
+        //For avoiding Collection issues of ManyToOne || OneToMany || ManyToMany
+        //relationship between 2 entities
+        return $this->json(
+            json_decode(
+                $serializer->serialize(
+                    $repository->findAll(),
+                    'json',
+                    [AbstractNormalizer::IGNORED_ATTRIBUTES => ['cours']]
+                ),
+                JSON_OBJECT_AS_ARRAY
+            )
+        );
+    }
+
+        //$Salle = $this->getDoctrine()->getManager()->getRepository(Salle::class)->findAll();
+        //$serializer = new Serializer([new ObjectNormalizer()],[AbstractNormalizer::INGNORED_ATTRIBUTES =>['cours']]);
+        //$formatted = $serializer->normalize($Salle);
+
+        //return new JsonResponse($formatted);
+
+
+
+    /**
+     * @Route("/addjson", name="addjson")
+     */
+
+    public function addjson(Request $request)
+    {
+        $sal = new Salle();
+        //req
+        $Id = $request->query->get("Id");
+        $Surface = $request->query->get("Surface");
+        $NomS = $request->query->get("NomS");
+        $CapaciteS = $request->query->get("CapaciteS");
+        $nbCoursMaxS= $request->query->get("nbCoursMaxS");
+        //$cours = $request->query->get("cours");
+        $description = $request->query->get("description");
+
+        //set
+        $sal->setId($Id);
+        $sal->setSurface($Surface);
+        $sal->setNomS($NomS);
+        $sal->setCapaciteS($CapaciteS);
+        $sal->setNbCoursMaxS($nbCoursMaxS);
+        $sal->setDescription($description);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($sal);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize("Salle ajoutée avec succes.");
+        return new JsonResponse($formatted);
+
+    }
+
+
+    /**
+     * @Route("/updatejson", name="updatejson")
+     */
+    public function updatejson(Request $request) {
+        //req
+        $Id = $request->get("Id");
+        $sal=$this->getDoctrine()->getManager()->getRepository(Salle::class)->find($Id);
+        $Surface = $request->query->get("Surface");
+        $NomS = $request->query->get("NomS");
+        $CapaciteS = $request->query->get("CapaciteS");
+        $nbCoursMaxS = $request->query->get("nbCoursMaxS");
+        $description= $request->query->get("description");
+
+        //set
+        $sal->setId($Id);
+        $sal->setSurface($Surface);
+        $sal->setNomS($NomS);
+        $sal->setCapaciteS($CapaciteS);
+        $sal->setNbCoursMaxS($nbCoursMaxS);
+        $sal->setDescription($description);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($sal);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($sal);
+        return new JsonResponse(" modifiee avec succes.");
+
+    }
+    /**
+     * @Route("/deletejson", name="deletejson")
+     */
+
+    public function deletejson(Request $request) {
+
+        $id = $request->get("Id");
+        $em = $this->getDoctrine()->getManager();
+        $sal = $em->getRepository(Salle::class)->find($id);
+        if($sal!=null ) {
+            $em->remove($sal);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("supprimé avec succes.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id invalide.");
+
+
+    }
+
+    /**
+     * @Route("/detailjson", name="detailjson")
+     */
+
+    public function detailjson(Request $request) {
+
+        $Id = $request->get("Id");
+        $em = $this->getDoctrine()->getManager();
+        $sal = $em->getRepository(Salle::class)->find($Id);
+        $encoder= new JsonEncoder();
+        $normalizer=new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object){
+            return $object->getDescription();
+        });
 
     }
 }
